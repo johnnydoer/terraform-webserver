@@ -18,3 +18,12 @@ module "natgw" {
   public_subnet_ids = module.subnets.public_subnet_ids
   igw_id            = module.igw.igw_id
 }
+
+module "route_tables" {
+  source             = "./modules/route_tables"
+  vpc_id             = module.vpc.vpc_id # Use the VPC ID from the VPC module
+  igw_id             = module.igw.igw_id
+  natgw_ids          = module.natgw.natgw_ids
+  private_subnet_ids = module.subnets.private_subnet_ids
+  public_subnet_ids  = module.subnets.public_subnet_ids
+}

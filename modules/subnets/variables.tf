@@ -24,5 +24,5 @@ variable "availability_zones" {
 variable "subnet_prefix" {
   description = "A prefix for subnet names to facilitate unique identification"
   type        = string
-  default     = "webserver-sub-"
+  default     = "webserver-sub"
 }
