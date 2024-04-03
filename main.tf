@@ -7,3 +7,8 @@ module "subnets" {
   source = "./modules/subnets"
   vpc_id = module.vpc.vpc_id # Use the VPC ID from the VPC module
 }
+
+module "igw" {
+  source            = "./modules/igw"
+  vpc_id            = module.vpc.vpc_id                # Use the VPC ID from the VPC module
+}
