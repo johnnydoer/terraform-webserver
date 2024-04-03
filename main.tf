@@ -9,6 +9,12 @@ module "subnets" {
 }
 
 module "igw" {
-  source            = "./modules/igw"
-  vpc_id            = module.vpc.vpc_id                # Use the VPC ID from the VPC module
+  source = "./modules/igw"
+  vpc_id = module.vpc.vpc_id # Use the VPC ID from the VPC module
+}
+
+module "natgw" {
+  source            = "./modules/natgw"
+  public_subnet_ids = module.subnets.public_subnet_ids
+  igw_id            = module.igw.igw_id
 }
