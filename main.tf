@@ -41,7 +41,7 @@ module "sg" {
 # Use a module to create EC2 instances
 module "ec2" {
   source             = "./modules/ec2"                   # Path to the EC2 instances module
-  sg_id              = module.sg.sg_id                   # Use the security group ID from the sg module
+  ec2_sg_id              = module.sg.ec2_sg_id                   # Use the security group ID from the sg module
   private_subnet_ids = module.subnets.private_subnet_ids # Use the private subnet IDs from the subnets module
   public_subnet_ids  = module.subnets.public_subnet_ids  # Use the public subnet IDs from the subnets module
 }

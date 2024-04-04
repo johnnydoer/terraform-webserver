@@ -3,8 +3,14 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "name" {
+variable "ec2_name" {
   description = "Name of the Security Group"
   type        = string
   default     = "webserver-ec2-sg"
+}
+
+variable "alb_name" {
+  description = "Name of the Security Group"
+  type        = string
+  default     = "webserver-alb-sg"
 }

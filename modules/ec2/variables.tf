@@ -14,7 +14,7 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
-variable "sg_id" {
+variable "ec2_sg_id" {
   description = "The ID of the SG where subnets will be created"
   type        = string
 }

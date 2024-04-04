@@ -9,7 +9,7 @@ resource "aws_key_pair" "webserver_ec2_key" {
 # Create a network interface for the EC2 instance to be launched in a public subnet
 resource "aws_network_interface" "ec2_public_interface" {
   subnet_id       = var.public_subnet_ids[0] # ID of the public subnet
-  security_groups = [var.sg_id]              # ID of the security group to associate with the network interface
+  security_groups = [var.ec2_sg_id]          # ID of the security group to associate with the network interface
 }
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
@@ -33,14 +33,14 @@ resource "aws_instance" "ec2_public" {
 # Create an EC2 Instance Connect endpoint for accessing EC2 instances in a private subnet
 resource "aws_ec2_instance_connect_endpoint" "ec2_private_connect" {
   subnet_id          = var.private_subnet_ids[0] # ID of the private subnet to associate the endpoint with
-  security_group_ids = [var.sg_id]               # IDs of the security groups to associate with the endpoint
+  security_group_ids = [var.ec2_sg_id]           # IDs of the security groups to associate with the endpoint
 }
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface
 # Create a network interface for the EC2 instance to be launched in a private subnet
 resource "aws_network_interface" "ec2_private_interface" {
   subnet_id       = var.private_subnet_ids[0] # ID of the private subnet
-  security_groups = [var.sg_id]               # ID of the security group to associate with the network interface
+  security_groups = [var.ec2_sg_id]           # ID of the security group to associate with the network interface
 }
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
