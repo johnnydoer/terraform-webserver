@@ -28,3 +28,34 @@ resource "aws_instance" "ec2_public" {
     Name = "webserver-public-ubuntu" # Name tag for the EC2 instance
   }
 }
+
+# Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_instance_connect_endpoint
+# Create an EC2 Instance Connect endpoint for accessing EC2 instances in a private subnet
+resource "aws_ec2_instance_connect_endpoint" "ec2_private_connect" {
+  subnet_id          = var.private_subnet_ids[0] # ID of the private subnet to associate the endpoint with
+  security_group_ids = [var.sg_id]               # IDs of the security groups to associate with the endpoint
+}
+
+# Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/network_interface
+# Create a network interface for the EC2 instance to be launched in a private subnet
+resource "aws_network_interface" "ec2_private_interface" {
+  subnet_id       = var.private_subnet_ids[0] # ID of the private subnet
+  security_groups = [var.sg_id]               # ID of the security group to associate with the network interface
+}
+
+# Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+# Create an EC2 instance in a private subnet
+resource "aws_instance" "ec2_private" {
+  ami           = var.ubuntu_ami                          # ID of the AMI to use for the instance
+  instance_type = var.instance_type                       # Type of EC2 instance to launch
+  key_name      = aws_key_pair.webserver_ec2_key.key_name # Name of the key pair to use for SSH access
+
+  network_interface {                                                     # Configuration for the network interface of the instance
+    network_interface_id = aws_network_interface.ec2_private_interface.id # ID of the network interface to attach
+    device_index         = 0                                              # Index of the device for the network interface
+  }
+
+  tags = {
+    Name = "webserver-private-ubuntu" # Name tag for the EC2 instance
+  }
+}
