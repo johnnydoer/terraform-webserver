@@ -27,3 +27,16 @@ module "route_tables" {
   private_subnet_ids = module.subnets.private_subnet_ids
   public_subnet_ids  = module.subnets.public_subnet_ids
 }
+
+module "sg" {
+  source = "./modules/sg"
+  vpc_id = module.vpc.vpc_id
+}
+
+module "ec2" {
+  source = "./modules/ec2"
+  # vpc_id             = module.vpc.vpc_id
+  sg_id              = module.sg.sg_id
+  private_subnet_ids = module.subnets.private_subnet_ids
+  public_subnet_ids  = module.subnets.public_subnet_ids
+}

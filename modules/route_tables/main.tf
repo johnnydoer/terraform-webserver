@@ -1,5 +1,5 @@
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
-resource "aws_route_table" "rt-public" {
+resource "aws_route_table" "rt_public" {
   count  = length(var.public_subnet_ids)
   vpc_id = var.vpc_id
 
@@ -14,13 +14,13 @@ resource "aws_route_table" "rt-public" {
 }
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
-resource "aws_route_table_association" "rta-public" {
-  count          = length(aws_route_table.rt-public)
+resource "aws_route_table_association" "rta_public" {
+  count          = length(aws_route_table.rt_public)
   subnet_id      = element(var.public_subnet_ids, count.index)
-  route_table_id = element(aws_route_table.rt-public[*].id, count.index)
+  route_table_id = element(aws_route_table.rt_public[*].id, count.index)
 }
 
-resource "aws_route_table" "rt-private" {
+resource "aws_route_table" "rt_private" {
   count  = length(var.private_subnet_ids)
   vpc_id = var.vpc_id
 
@@ -34,9 +34,9 @@ resource "aws_route_table" "rt-private" {
   }
 }
 
-resource "aws_route_table_association" "rta-private" {
-  count          = length(aws_route_table.rt-private)
+resource "aws_route_table_association" "rta_private" {
+  count          = length(aws_route_table.rt_private)
   subnet_id      = element(var.private_subnet_ids, count.index)
-  route_table_id = element(aws_route_table.rt-private[*].id, count.index)
+  route_table_id = element(aws_route_table.rt_private[*].id, count.index)
 }
 

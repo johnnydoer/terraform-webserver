@@ -2,3 +2,7 @@
 output "natgw_ids" {
   value = aws_nat_gateway.natgw[*].id
 }
+
+output "nat_gw_eip_ids" {
+  value = aws_eip.natgw_eip[*].id
+}
