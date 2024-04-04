@@ -14,3 +14,7 @@ output "private_subnet_ids" {
 output "igw_id" {
   value = module.igw.igw_id
 }
+
+output "ec2_public_IP" {
+  value = module.ec2.ec2_public_IP
+}
