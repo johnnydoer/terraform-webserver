@@ -2,7 +2,7 @@
 variable "cidr_block" {
   description = "The CIDR block for the VPC" # Description of the variable
   type        = string                       # The type of the variable, in this case, a string
-  default     = "10.0.0.0/16"
+  default     = "10.0.0.0/16"                # Default value for the variable if not explicitly provided
 }
 
 # Declare a variable for naming the VPC, with a default value
