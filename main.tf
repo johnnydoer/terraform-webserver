@@ -47,8 +47,9 @@ module "sg" {
 # }
 
 module "ec2_template" {
-  source    = "./modules/ec2_template" # Path to the EC2 instances module
-  ec2_sg_id = module.sg.ec2_sg_id      # Use the security group ID from the sg module
+  source             = "./modules/ec2_template"          # Path to the EC2 instances module
+  ec2_sg_id          = module.sg.ec2_sg_id               # Use the security group ID from the sg module
+  private_subnet_ids = module.subnets.private_subnet_ids # Use the private subnet IDs from the subnets module
 }
 
 # Use a module to create application load balancer
@@ -61,8 +62,9 @@ module "alb" {
 
 # Use a module to create auto scaling group
 module "asg" {
-  source            = "./modules/asg"   # Path to the security groups module
-  vpc_id            = module.vpc.vpc_id # Use the VPC ID from the VPC module
-  alb_sg_id         = module.sg.alb_sg_id
-  public_subnet_ids = module.subnets.public_subnet_ids
+  source               = "./modules/asg" # Path to the security groups module
+  ec2_template_id      = module.ec2_template.ec2_template_id
+  private_subnet_ids   = module.subnets.private_subnet_ids
+  ec2_alb_id           = module.alb.ec2_alb_id
+  ec2_alb_target_group = module.alb.ec2_alb_target_group
 }

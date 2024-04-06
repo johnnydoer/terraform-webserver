@@ -4,7 +4,6 @@ variable "route_table_prefix" {
   default     = "webserver-rt"
 }
 
-
 variable "vpc_id" {
   description = "The ID of the VPC where route table will be created"
   type        = string

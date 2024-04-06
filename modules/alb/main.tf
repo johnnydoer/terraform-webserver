@@ -16,6 +16,7 @@ resource "aws_lb_target_group" "ec2_alb_target_group" {
   health_check {
     healthy_threshold = 2
     interval          = 10
+    # matcher = 
   }
 }
 
