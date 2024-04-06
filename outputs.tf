@@ -20,7 +20,7 @@ output "igw_id" {
   value = module.igw.igw_id
 }
 
-# Output the public IP address of an EC2 instance
-output "ec2_public_IP" {
-  value = module.ec2.ec2_public_IP
-}
+# # Output the public IP address of an EC2 instance
+# output "ec2_public_IP" {
+#   value = module.ec2.ec2_public_IP
+# }

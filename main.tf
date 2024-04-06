@@ -38,10 +38,31 @@ module "sg" {
   vpc_id = module.vpc.vpc_id # Use the VPC ID from the VPC module
 }
 
-# Use a module to create EC2 instances
-module "ec2" {
-  source             = "./modules/ec2"                   # Path to the EC2 instances module
-  ec2_sg_id              = module.sg.ec2_sg_id                   # Use the security group ID from the sg module
-  private_subnet_ids = module.subnets.private_subnet_ids # Use the private subnet IDs from the subnets module
-  public_subnet_ids  = module.subnets.public_subnet_ids  # Use the public subnet IDs from the subnets module
+# # Use a module to create EC2 instances
+# module "ec2" {
+#   source             = "./modules/ec2"                   # Path to the EC2 instances module
+#   ec2_sg_id          = module.sg.ec2_sg_id               # Use the security group ID from the sg module
+#   private_subnet_ids = module.subnets.private_subnet_ids # Use the private subnet IDs from the subnets module
+#   public_subnet_ids  = module.subnets.public_subnet_ids  # Use the public subnet IDs from the subnets module
+# }
+
+module "ec2_template" {
+  source    = "./modules/ec2_template" # Path to the EC2 instances module
+  ec2_sg_id = module.sg.ec2_sg_id      # Use the security group ID from the sg module
+}
+
+# Use a module to create application load balancer
+module "alb" {
+  source            = "./modules/alb"   # Path to the security groups module
+  vpc_id            = module.vpc.vpc_id # Use the VPC ID from the VPC module
+  alb_sg_id         = module.sg.alb_sg_id
+  public_subnet_ids = module.subnets.public_subnet_ids
+}
+
+# Use a module to create auto scaling group
+module "asg" {
+  source            = "./modules/asg"   # Path to the security groups module
+  vpc_id            = module.vpc.vpc_id # Use the VPC ID from the VPC module
+  alb_sg_id         = module.sg.alb_sg_id
+  public_subnet_ids = module.subnets.public_subnet_ids
 }
