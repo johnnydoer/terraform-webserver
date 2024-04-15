@@ -4,6 +4,10 @@ output "ec2_sg_id" {
   value = aws_security_group.ec2_sg.id # The ID of the EC2 security group is derived from the aws_security_group resource created
 }
 
+output "ec2_endpoint_sg_id" {
+  value = aws_security_group.ec2_endpoint_sg.id # The ID of the EC2 security group is derived from the aws_security_group resource created
+}
+
 output "alb_sg_id" {
   value = aws_security_group.alb_sg.id # The ID of the EC2 security group is derived from the aws_security_group resource created
 }

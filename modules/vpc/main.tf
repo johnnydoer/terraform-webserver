@@ -1,5 +1,5 @@
-# Create a resource of type "aws_vpc" named "main"
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+# Create a resource of type "aws_vpc" named "main"
 resource "aws_vpc" "main" {
   cidr_block           = var.cidr_block # Set the CIDR block for the VPC, referencing the cidr_block variable
   enable_dns_support   = true           # Enable DNS support within the VPC (helpful for resolving AWS service endpoints)
@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
 
   # Define tags for the VPC, including a "Name" tag, utilizing the name variable
   tags = {
-    Name        = var.name
-    environment = var.environment
+    Name        = var.name        # Name tag for the VPC
+    environment = var.environment # Environment tag for the VPC
   }
 }

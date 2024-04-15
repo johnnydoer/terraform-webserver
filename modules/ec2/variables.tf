@@ -19,6 +19,11 @@ variable "ec2_sg_id" {
   type        = string
 }
 
+variable "ec2_endpoint_sg_id" {
+  description = "The ID of the SG where subnets will be created"
+  type        = string
+}
+
 variable "instance_type" {
   type        = string
   description = "Type of EC2 instance"
