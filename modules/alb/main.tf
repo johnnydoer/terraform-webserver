@@ -26,10 +26,28 @@ resource "aws_lb_target_group" "ec2_alb_target_group" {
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
 # Define a listener for the ALB to route traffic to the target group
-resource "aws_lb_listener" "ec2_alb_listener" {
+resource "aws_lb_listener" "ec2_alb_listener_HTTP" {
   load_balancer_arn = aws_lb.ec2_alb.arn # ARN of the ALB
   port              = "80"               # Port on which the ALB listens for incoming traffic
   protocol          = "HTTP"             # Protocol used for communication
+  # Define default action to forward incoming requests to the target group
+  default_action {
+    type = "redirect" # Action type to forward requests
+
+    redirect {
+      port        = 443
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "ec2_alb_listener_HTTPS" {
+  load_balancer_arn = aws_lb.ec2_alb.arn # ARN of the ALB
+  port              = "443"              # Port on which the ALB listens for incoming traffic
+  protocol          = "HTTPS"            # Protocol used for communication
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn   = var.certificate_arn
 
   # Define default action to forward incoming requests to the target group
   default_action {
@@ -37,6 +55,7 @@ resource "aws_lb_listener" "ec2_alb_listener" {
     target_group_arn = aws_lb_target_group.ec2_alb_target_group.arn # ARN of the target group to forward traffic to
   }
 }
+
 
 # Resource to attach EC2 instances to the target group (currently commented out)
 # resource "aws_lb_target_group_attachment" "ec2_alb_tg_attachment" {

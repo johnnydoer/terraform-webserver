@@ -14,10 +14,10 @@ resource "aws_launch_template" "ec2_template" {
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ec2_instance_connect_endpoint
 # Create an EC2 Instance Connect endpoint for accessing EC2 instances in a private subnet
-resource "aws_ec2_instance_connect_endpoint" "ec2_private_connect" {
-  subnet_id          = var.private_subnet_ids[0] # ID of the private subnet to associate the endpoint with
-  security_group_ids = [var.ec2_endpoint_sg_id]  # IDs of the security groups to associate with the endpoint
-}
+# resource "aws_ec2_instance_connect_endpoint" "ec2_private_connect" {
+#   subnet_id          = var.private_subnet_ids[0] # ID of the private subnet to associate the endpoint with
+#   security_group_ids = [var.ec2_endpoint_sg_id]  # IDs of the security groups to associate with the endpoint
+# }
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 # Create an AWS key pair for SSH access to EC2 instances

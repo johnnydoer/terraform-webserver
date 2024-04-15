@@ -46,7 +46,7 @@ module "sg" {
 #   public_subnet_ids  = module.subnets.public_subnet_ids  # Use the public subnet IDs from the subnets module
 # }
 
-# Use a module to create EC2 instances
+# Use a module to create EC2 instances from templates
 module "ec2_template" {
   source             = "./modules/ec2_template"          # Path to the EC2 instances module
   alb_sg_id          = module.sg.alb_sg_id               # Use the ALB security group ID from the sg module
@@ -61,6 +61,7 @@ module "alb" {
   vpc_id            = module.vpc.vpc_id                # Use the VPC ID from the VPC module
   alb_sg_id         = module.sg.alb_sg_id              # Use the security group ID for the ALB from the sg module
   public_subnet_ids = module.subnets.public_subnet_ids # Use the public subnet IDs from the subnets module
+  certificate_arn   = module.certificates.certificate_arn
 }
 
 # Use a module to create auto scaling group
@@ -70,4 +71,8 @@ module "asg" {
   ec2_alb_target_group = module.alb.ec2_alb_target_group     # Use the target group from the alb module
   private_subnet_ids   = module.subnets.private_subnet_ids   # Use the private subnet IDs from the subnets module
   ec2_template_id      = module.ec2_template.ec2_template_id # Use the EC2 template ID from the ec2_template module
+}
+
+module "certificates" {
+  source = "./modules/certificates" # Path to the auto scaling group module
 }
