@@ -76,3 +76,13 @@ module "asg" {
 module "certificates" {
   source = "./modules/certificates" # Path to the auto scaling group module
 }
+
+module "cloudfront" {
+  source             = "./modules/cloudfront" # Path to the auto scaling group module
+  ec2_alb_id         = module.alb.ec2_alb_id
+  ec2_alb_dns        = module.alb.ec2_alb_dns
+  cf_certificate_arn = module.certificates.cf_certificate_arn
+
+}
+
+

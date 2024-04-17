@@ -5,3 +5,7 @@ output "ec2_alb_id" {
 output "ec2_alb_target_group" {
   value = aws_lb_target_group.ec2_alb_target_group
 }
+
+output "ec2_alb_dns" {
+  value = aws_lb.ec2_alb.dns_name
+}
