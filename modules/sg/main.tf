@@ -49,7 +49,7 @@ resource "aws_security_group" "alb_sg" {
 
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule
 # Define an ingress rule for the ALB security group to allow HTTP traffic from any source
-resource "aws_vpc_security_group_ingress_rule" "alb_http_sg_ingress" {
+resource "aws_vpc_security_group_ingress_rule" "alb_sg_ingress_http" {
   security_group_id = aws_security_group.alb_sg.id # ID of the ALB security group to apply the rule to
 
   cidr_ipv4   = "0.0.0.0/0" # CIDR block for IPv4 addresses (allowing from any source)
@@ -59,7 +59,7 @@ resource "aws_vpc_security_group_ingress_rule" "alb_http_sg_ingress" {
 }
 
 # Define an ingress rule for the ALB security group to allow HTTPS traffic from any source
-resource "aws_vpc_security_group_ingress_rule" "alb_https_sg_ingress" {
+resource "aws_vpc_security_group_ingress_rule" "alb_sg_ingress_https" {
   security_group_id = aws_security_group.alb_sg.id # ID of the ALB security group to apply the rule to
 
   cidr_ipv4   = "0.0.0.0/0" # CIDR block for IPv4 addresses (allowing from any source)

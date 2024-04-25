@@ -1,8 +1,10 @@
+# Variables from other modules
 variable "vpc_id" {
   description = "The ID of the VPC where subnets will be created"
   type        = string
 }
 
+# Variables
 variable "public_subnets_cidr" {
   description = "List of CIDR blocks for the public subnets"
   type        = list(string)

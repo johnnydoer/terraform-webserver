@@ -1,9 +1,4 @@
-variable "route_table_prefix" {
-  description = "A prefix for subnet names to facilitate unique identification"
-  type        = string
-  default     = "webserver-rt"
-}
-
+# Variables from other modules
 variable "vpc_id" {
   description = "The ID of the VPC where route table will be created"
   type        = string
@@ -28,3 +23,11 @@ variable "public_subnet_ids" {
   description = "List of public subnet IDs"
   type        = list(string)
 }
+
+# Variables
+variable "route_table_prefix" {
+  description = "A prefix for subnet names to facilitate unique identification"
+  type        = string
+  default     = "webserver-rt"
+}
+

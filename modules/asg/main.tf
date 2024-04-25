@@ -42,11 +42,3 @@ resource "aws_autoscaling_policy" "ec2_asg_policy" {
     }
   }
 }
-
-# Note: The creation of a load balancer attachment resource is currently commented out.
-# Uncomment and configure the resource if needed.
-# resource "aws_autoscaling_attachment" "ec2_asg_alb_attachment" {
-#   autoscaling_group_name = aws_autoscaling_group.ec2_asg.name
-#   elb                    = var.ec2_alb_id
-# }
- 

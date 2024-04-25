@@ -35,12 +35,13 @@ resource "aws_lb_listener" "ec2_alb_listener_HTTP" {
     type = "redirect" # Action type to forward requests
 
     redirect {
-      port        = 443
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
+      port        = 443        # Port to redirect to
+      protocol    = "HTTPS"    # Protocol to use for the redirect
+      status_code = "HTTP_301" # HTTP status code for the redirect
     }
   }
 }
+
 
 resource "aws_lb_listener" "ec2_alb_listener_HTTPS" {
   load_balancer_arn = aws_lb.ec2_alb.arn # ARN of the ALB
@@ -55,16 +56,3 @@ resource "aws_lb_listener" "ec2_alb_listener_HTTPS" {
     target_group_arn = aws_lb_target_group.ec2_alb_target_group.arn # ARN of the target group to forward traffic to
   }
 }
-
-
-# Resource to attach EC2 instances to the target group (currently commented out)
-# resource "aws_lb_target_group_attachment" "ec2_alb_tg_attachment" {
-#   for_each = {
-#     for k, v in aws_instance.example :
-#     k => v
-#   }
-
-#   target_group_arn = aws_lb_target_group.ec2_alb_target_group.arn
-#   target_id        = aws_instance.test.id
-#   port             = 80
-# }

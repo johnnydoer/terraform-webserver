@@ -1,7 +1,7 @@
 # Docs: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 # Create a route table for public subnets
 resource "aws_route_table" "rt_public" {
-  count  = length(var.public_subnet_ids) # Number of public subnets
+  count  = length(var.public_subnet_ids) # Number of route tables to create based on the length of the provided public subnets
   vpc_id = var.vpc_id                    # ID of the VPC
 
   route {
@@ -22,9 +22,10 @@ resource "aws_route_table_association" "rta_public" {
   route_table_id = element(aws_route_table.rt_public[*].id, count.index) # ID of the public route table
 }
 
+
 # Create a route table for private subnets
 resource "aws_route_table" "rt_private" {
-  count  = length(var.private_subnet_ids) # Number of private subnets
+  count  = length(var.private_subnet_ids) # Number of route tables to create based on the length of the provided private subnets
   vpc_id = var.vpc_id                     # ID of the VPC
 
   route {

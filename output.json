@@ -1,0 +1,45 @@
+{
+  "certificate_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:acm:us-west-2:434158544089:certificate/098911d9-8938-4232-a0fd-72605a89bc84"
+  },
+  "igw_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "igw-0b299557d4b50f94c"
+  },
+  "private_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-0355d971dc827d213",
+      "subnet-0cc76074ada15e472"
+    ]
+  },
+  "public_subnet_ids": {
+    "sensitive": false,
+    "type": [
+      "tuple",
+      [
+        "string",
+        "string"
+      ]
+    ],
+    "value": [
+      "subnet-086489b5b31852e66",
+      "subnet-0857b5dcb2f27ab25"
+    ]
+  },
+  "vpc_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vpc-010ce84639da11134"
+  }
+}

@@ -1,8 +1,10 @@
+# Variables from other modules
 variable "vpc_id" {
   description = "The ID of the VPC where subnets will be created"
   type        = string
 }
 
+# Variables
 variable "ec2_name" {
   description = "Name of the Security Group"
   type        = string
