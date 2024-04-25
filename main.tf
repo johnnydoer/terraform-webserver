@@ -82,7 +82,9 @@ module "cloudfront" {
   ec2_alb_id         = module.alb.ec2_alb_id
   ec2_alb_dns        = module.alb.ec2_alb_dns
   cf_certificate_arn = module.certificates.cf_certificate_arn
-
 }
 
+module "web_acl" {
+  source = "./modules/web_acl" # Path to the auto scaling group module
+}
 

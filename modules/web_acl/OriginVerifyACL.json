@@ -1,0 +1,48 @@
+{
+  "Name": "OriginVerifyACL",
+  "Id": "9628c69d-e627-41c6-aef3-8978b24d9887",
+  "ARN": "arn:aws:wafv2:us-west-2:434158544089:regional/webacl/OriginVerifyACL/9628c69d-e627-41c6-aef3-8978b24d9887",
+  "DefaultAction": {
+    "Block": {}
+  },
+  "Description": "",
+  "Rules": [
+    {
+      "Name": "OriginVerifyHeaderRule",
+      "Priority": 0,
+      "Statement": {
+        "ByteMatchStatement": {
+          "SearchString": "Terraform-AWS-Webserver",
+          "FieldToMatch": {
+            "SingleHeader": {
+              "Name": "x-origin-verify"
+            }
+          },
+          "TextTransformations": [
+            {
+              "Priority": 0,
+              "Type": "NONE"
+            }
+          ],
+          "PositionalConstraint": "EXACTLY"
+        }
+      },
+      "Action": {
+        "Allow": {}
+      },
+      "VisibilityConfig": {
+        "SampledRequestsEnabled": true,
+        "CloudWatchMetricsEnabled": true,
+        "MetricName": "OriginVerifyHeaderRule"
+      }
+    }
+  ],
+  "VisibilityConfig": {
+    "SampledRequestsEnabled": true,
+    "CloudWatchMetricsEnabled": true,
+    "MetricName": "OriginVerifyACL"
+  },
+  "Capacity": 2,
+  "ManagedByFirewallManager": false,
+  "LabelNamespace": "awswaf:434158544089:webacl:OriginVerifyACL:"
+}
