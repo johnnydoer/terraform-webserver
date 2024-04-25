@@ -43,7 +43,7 @@ resource "aws_cloudfront_distribution" "cloudfront" {
     ssl_support_method       = "sni-only"             # SSL support method for the viewer certificate
   }
 
-  # web_acl_id = aws_wafv2_web_acl.arn # Web ACL ID for the CloudFront distribution
+  web_acl_id = var.cloudfront_web_acl_arn # Web ACL ID for the CloudFront distribution
 }
 
 # Define an origin request policy for the CloudFront distribution

@@ -9,3 +9,7 @@ variable "ec2_alb_id" {
 variable "cf_certificate_arn" {
   type = string
 }
+
+variable "cloudfront_web_acl_arn" {
+  type = string
+}

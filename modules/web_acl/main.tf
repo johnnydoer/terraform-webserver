@@ -1,7 +1,8 @@
 # Define a WAFv2 Web ACL for CloudFront with AWS Managed Rules
 resource "aws_wafv2_web_acl" "cloudfront_web_acl" {
-  name  = "cloudfront-web-acl" # Name of the WAFv2 Web ACL
-  scope = "REGIONAL"           # Scope of the WAFv2 Web ACL
+  provider = aws.us-east-1        # Specify the AWS provider for the us-east-1 region
+  name     = "cloudfront-web-acl" # Name of the WAFv2 Web ACL
+  scope    = "CLOUDFRONT"         # Scope of the WAFv2 Web ACL
 
   default_action {
     allow {} # Default action to allow requests
