@@ -105,18 +105,38 @@ resource "aws_wafv2_web_acl" "origin_verify_acl" {
     priority = 0 # Priority of the rule
 
     statement {
-      byte_match_statement {
-        search_string = "Terraform-AWS-Webserver" # Search string for the byte match
-        field_to_match {
-          single_header {
-            name = "x-origin-verify" # Name of the header to match
+      or_statement {
+        statement {
+          byte_match_statement {
+            search_string = "Terraform-AWS-Webserver" # Search string for the byte match
+            field_to_match {
+              single_header {
+                name = "x-origin-verify" # Name of the header to match
+              }
+            }
+            text_transformation {
+              priority = 0      # Priority of the text transformation
+              type     = "NONE" # Type of the text transformation
+            }
+            positional_constraint = "EXACTLY" # Positional constraint for the match
           }
         }
-        text_transformation {
-          priority = 0      # Priority of the text transformation
-          type     = "NONE" # Type of the text transformation
+
+        statement {
+          byte_match_statement {
+            search_string = "Terraform-AWS-Webserver" # Search string for the byte match
+            field_to_match {
+              single_header {
+                name = "x-origin-verify" # Name of the header to match
+              }
+            }
+            text_transformation {
+              priority = 0      # Priority of the text transformation
+              type     = "NONE" # Type of the text transformation
+            }
+            positional_constraint = "EXACTLY" # Positional constraint for the match
+          }
         }
-        positional_constraint = "EXACTLY" # Positional constraint for the match
       }
     }
 
